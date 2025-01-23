@@ -1,6 +1,7 @@
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  overflow-y: auto;
 }
 
 * {
@@ -13,6 +14,7 @@ html {
 body {
   background-color: #0c0c1d;
   color: lightgray;
+  overflow-y: auto;
 }
 
 a {
@@ -23,8 +25,28 @@ a {
 section {
   height: 100vh;
   width: 100vw;
-  scroll-snap-align: center;
-  overflow: hidden;
+  scroll-snap-align: start;
+  overflow-y: auto;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  max-height: 90vh;  /* Allow some space for the keyboard */
+  overflow-y: auto;  /* Ensure scrolling when the keyboard appears */
+}
+
+input,
+textarea {
+  padding: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;  /* Optional: space out inputs */
 }
 
 @mixin mobile {
