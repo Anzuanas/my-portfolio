@@ -28,20 +28,24 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+  
+    // Initialize EmailJS with your public key
+    emailjs.init('your_public_key'); // Replace 'your_public_key' with the actual public key
+  
+    // Send email using the service ID, template ID, form data, and public key
     emailjs
       .sendForm(
-        "service_94y20xo",
-        "template_v10u2oh",
-        formRef.current,
-        "pX_2hasGmGcuvjXIW"
+        "service_4ozwh9p",   // Your service ID
+        "template_990iqrr",   // Your template ID
+        formRef.current,      // Reference to the form
+        "pX_2hasGmGcuvjXIW"   // Your user public key (optional if using emailjs.init)
       )
       .then(
         (result) => {
-          setSuccess(true)
+          setSuccess(true); // Set success state on email sent
         },
         (error) => {
-          setError(true);
+          setError(true); // Set error state if there's an issue
         }
       );
   };
