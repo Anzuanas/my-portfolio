@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 50px;
+  padding-bottom: 20px;
 
   @include mobile {
     width: 100%;
@@ -23,10 +24,12 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    text-align: center;
 
     @include mobile {
       gap: 20px;
+      text-align: center;
+      align-items: center;
+      margin-top: 70px;
     }
 
     h1 {
@@ -41,6 +44,18 @@
     span {
       font-weight: 300;
     }
+
+    .item {
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      span {
+        font-size: 16px;
+        color: #f1f1f1;
+      }
+    }
   }
 
   .formContainer {
@@ -49,11 +64,55 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 80vh;
+    overflow-y: auto;  /* Make sure form is scrollable */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 
     @include mobile {
+      max-width: 400px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       width: 100%;
-      padding: 20px;
-      max-width: 400px;  // Ensure the form fits well on mobile screens
+    }
+
+    input,
+    textarea {
+      padding: 15px;
+      background-color: transparent;
+      border: 1px solid white;
+      color: white;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+
+      @include mobile {
+        padding: 12px;
+      }
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      background-color: orange;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 5px;
+
+      @include mobile {
+        padding: 12px;
+      }
+
+      &:hover {
+        background-color: darkorange;
+      }
     }
 
     .phoneSvg {
@@ -62,46 +121,23 @@
       margin: auto;
       z-index: -1;
     }
+  }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      width: 100%; // Ensure full width on mobile
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 
-      input,
-      textarea {
-        padding: 15px;
-        background-color: transparent;
-        border: 1px solid white;
-        color: white;
-        border-radius: 5px;
-        width: 100%;  // Make sure inputs are full width
-        box-sizing: border-box;
-
-        @include mobile {
-          padding: 12px;
-        }
-      }
-
-      button {
-        padding: 15px;
-        border: none;
-        background-color: orange;
-        color: white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 100%;  // Ensure the button stretches across the full form width
-        border-radius: 5px;
-
-        @include mobile {
-          padding: 12px;
-        }
-
-        &:hover {
-          background-color: darkorange;
-        }
-      }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { Link, animateScroll as scroll } from "react-scroll";
-import "./contact.scss";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import "./contact.scss";
 
 const variants = {
   initial: {
@@ -30,51 +29,55 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    // Initialize EmailJS with your public key
-    emailjs.init('ZE5I912mRnq15xnpT'); // Replace 'your_public_key' with the actual public key
-
-    // Send email using the service ID, template ID, form data, and public key
     emailjs
       .sendForm(
-        "service_4ozwh9p",   // Your service ID
-        "template_990iqrr",   // Your template ID
-        formRef.current,      // Reference to the form
-        "ZE5I912mRnq15xnpT"   // Your user public key (optional if using emailjs.init)
+        "service_4ozwh9p",
+        "template_990iqrr",
+        formRef.current,
+        "ZE5I912mRnq15xnpT"
       )
       .then(
         (result) => {
-          setSuccess(true); // Set success state on email sent
+          setSuccess(true); // Show success message
         },
         (error) => {
-          setError(true); // Set error state if there's an issue
+          setError(true); // Show error message
         }
       );
   };
 
-  // Function to handle focus on form inputs
+  // Function to handle scroll behavior for form
   const handleFocus = (e) => {
-    // Scroll only the form to the focused input field
     const element = e.target;
-    const container = formRef.current; // Form container element
+    const container = formRef.current;
 
-    // Calculate the position of the focused input
+    // Scroll container smoothly to the focused input
     const offsetTop = element.offsetTop;
-
-    // Scroll smoothly to the focused input
     container.scrollTo({
-      top: offsetTop - 50, // Adjust for padding or keyboard space
+      top: offsetTop - 50, // Adjust for padding/keyboard space
       behavior: "smooth",
     });
+  };
+
+  // Reset any scroll issues on typing
+  const handleInput = () => {
+    const container = formRef.current;
+
+    // Ensure no scroll jump happens during typing
+    container.style.scrollBehavior = "smooth";
   };
 
   useEffect(() => {
     const inputs = formRef.current.querySelectorAll("input, textarea");
     inputs.forEach((input) => {
       input.addEventListener("focus", handleFocus);
+      input.addEventListener("input", handleInput); // Add input event listener
     });
+
     return () => {
       inputs.forEach((input) => {
         input.removeEventListener("focus", handleFocus);
+        input.removeEventListener("input", handleInput);
       });
     };
   }, []);
