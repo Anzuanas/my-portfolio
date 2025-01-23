@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { Link, animateScroll as scroll } from "react-scroll";
 import "./contact.scss";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
@@ -50,12 +51,17 @@ const Contact = () => {
       );
   };
 
+  // Function to handle focus on form inputs
   const handleFocus = (e) => {
-    // Scroll the focused input into view
-    e.target.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Scroll to the focused input field smoothly
+    const element = e.target;
+    scroll.scrollTo(element.offsetTop, {
+      duration: 500,
+      smooth: true,
+      offset: -50, // Adjust for the header or keyboard
+    });
   };
 
-  // Add the event listener for focus on inputs
   useEffect(() => {
     const inputs = formRef.current.querySelectorAll("input, textarea");
     inputs.forEach((input) => {
