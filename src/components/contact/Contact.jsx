@@ -29,10 +29,10 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-  
+
     // Initialize EmailJS with your public key
     emailjs.init('ZE5I912mRnq15xnpT'); // Replace 'your_public_key' with the actual public key
-  
+
     // Send email using the service ID, template ID, form data, and public key
     emailjs
       .sendForm(
@@ -53,12 +53,17 @@ const Contact = () => {
 
   // Function to handle focus on form inputs
   const handleFocus = (e) => {
-    // Scroll to the focused input field smoothly
+    // Scroll only the form to the focused input field
     const element = e.target;
-    scroll.scrollTo(element.offsetTop, {
-      duration: 500,
-      smooth: true,
-      offset: -50, // Adjust for the header or keyboard
+    const container = formRef.current; // Form container element
+
+    // Calculate the position of the focused input
+    const offsetTop = element.offsetTop;
+
+    // Scroll smoothly to the focused input
+    container.scrollTo({
+      top: offsetTop - 50, // Adjust for padding or keyboard space
+      behavior: "smooth",
     });
   };
 
@@ -97,9 +102,8 @@ const Contact = () => {
           <span>+91 9072376547</span>
         </motion.div>
       </motion.div>
-      <div className="formContainer">
+      <div className="formContainer" ref={formRef}>
         <motion.form
-          ref={formRef}
           onSubmit={sendEmail}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
