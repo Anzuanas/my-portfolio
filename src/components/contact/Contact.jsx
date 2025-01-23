@@ -30,7 +30,7 @@ const Contact = () => {
     e.preventDefault();
   
     // Initialize EmailJS with your public key
-    emailjs.init('your_public_key'); // Replace 'your_public_key' with the actual public key
+    emailjs.init('ZE5I912mRnq15xnpT'); // Replace 'your_public_key' with the actual public key
   
     // Send email using the service ID, template ID, form data, and public key
     emailjs
@@ -38,7 +38,7 @@ const Contact = () => {
         "service_4ozwh9p",   // Your service ID
         "template_990iqrr",   // Your template ID
         formRef.current,      // Reference to the form
-        "pX_2hasGmGcuvjXIW"   // Your user public key (optional if using emailjs.init)
+        "ZE5I912mRnq15xnpT"   // Your user public key (optional if using emailjs.init)
       )
       .then(
         (result) => {
